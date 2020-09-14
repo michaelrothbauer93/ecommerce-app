@@ -1,14 +1,17 @@
 import { createStore, applyMiddleware } from 'redux';
 
-//middlewares
+// state persistance
+import { persistStore } from 'redux-persist';
+
+// middlewares
 import logger from 'redux-logger';
 
 import rootReducer from './root-reducer';
 
-//ES6 syntax to use spread operator to provide applyMiddleware
+// ES6 syntax to use spread operator to provide applyMiddleware
 const middlewares = [logger];
 
-//Insted of spread operator could just pass middlware itself
-const store = createStore(rootReducer, applyMiddleware(...middlewares));
+// Insted of spread operator could just pass middlware itself
+export const store = createStore(rootReducer, applyMiddleware(...middlewares));
 
-export default store;
+export const persistor = persistStore(store);
